@@ -205,7 +205,7 @@ function loadProfile() {
     state.profile.name = data.name || "Esila";
     state.profile.avatar = data.avatar || "a1";
   } catch {
-    // ignore invalid data
+    // gecersiz veri varsa yoksay
   }
 }
 

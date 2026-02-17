@@ -1,6 +1,6 @@
 {
-  "name": "Esila Nurse Studio",
-  "short_name": "EsilaNurse",
+  "name": "Esila Icin Site",
+  "short_name": "EsilaSite",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#eef9f8",

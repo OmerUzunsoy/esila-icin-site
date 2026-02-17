@@ -1,0 +1,17 @@
+{
+  "name": "Esila Nurse Studio",
+  "short_name": "EsilaNurse",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef9f8",
+  "theme_color": "#0f5f59",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%230f5f59'/%3E%3Ccircle cx='64' cy='64' r='35' fill='%2319a392'/%3E%3Cpath d='M64 42v44M42 64h44' stroke='%23fff' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

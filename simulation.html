@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f5f59" />
+    <title>Simulasyon | Esila Nurse Studio</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="shell-header">
+      <a class="brand" href="index.html"><span>Esila</span> Nurse Studio</a>
+      <nav class="shell-nav">
+        <a href="index.html" data-page-link="home">Panel</a>
+        <a href="training.html" data-page-link="training">Egitim</a>
+        <a href="simulation.html" data-page-link="simulation">Sim</a>
+        <a href="profile.html" data-page-link="profile">Profil</a>
+      </nav>
+      <div class="shell-user">
+        <div id="shellAvatar" class="avatar-chip skin-mint">E</div>
+        <div>
+          <b id="shellName">Esila</b>
+          <small>Lv <span id="shellLevel">1</span> | <span id="shellCoins">0</span> coin</small>
+        </div>
+      </div>
+    </header>
+
+    <div id="globalNotice" class="notice"></div>
+
+    <main class="container simulation-container">
+      <section class="card scenario-card">
+        <div class="lab-head">
+          <h1>Gercekci Hasta Simulasyonu</h1>
+          <button id="simStartBtn" class="btn btn-primary">Yeni Vaka Baslat</button>
+        </div>
+        <p id="simScenarioName" class="pill">Vaka: Hazir degil</p>
+        <p id="simScenarioInfo" class="muted">Baslatinca rastgele servis + rastgele vaka akisinda ilerlersin.</p>
+        <div class="stage-box">
+          <p id="simTurnStat"><b>Tur:</b> 0 / 0</p>
+          <h3 id="simPhaseText">Hasta kabul adimi bekleniyor.</h3>
+          <p id="simPhaseHint" class="muted">Dogru adim secimi hem puan hem hasta guvenligi icin kritik.</p>
+        </div>
+      </section>
+
+      <section class="simulation-grid">
+        <article class="card monitor-card">
+          <h2>Hasta Monituru</h2>
+          <div class="monitor-grid">
+            <div class="metric">
+              <span>SpO2</span>
+              <b id="spo2Value">--</b>
+              <div class="bar"><i id="spo2Bar"></i></div>
+            </div>
+            <div class="metric">
+              <span>Nabiz</span>
+              <b id="hrValue">--</b>
+              <div class="bar"><i id="hrBar"></i></div>
+            </div>
+            <div class="metric">
+              <span>TA (Sys)</span>
+              <b id="bpValue">--</b>
+              <div class="bar"><i id="bpBar"></i></div>
+            </div>
+            <div class="metric">
+              <span>Bilinc</span>
+              <b id="conValue">--</b>
+              <div class="bar"><i id="conBar"></i></div>
+            </div>
+            <div class="metric">
+              <span>Hemoglobin</span>
+              <b id="hbValue">--</b>
+              <div class="bar"><i id="hbBar"></i></div>
+            </div>
+            <div class="metric">
+              <span>Kanama</span>
+              <b id="bleedValue">--</b>
+              <div class="bar"><i id="bleedBar"></i></div>
+            </div>
+          </div>
+
+          <h3>Komplikasyonlar</h3>
+          <div id="complicationList" class="chip-list"></div>
+
+          <h3>Simulasyon Sonucu</h3>
+          <div id="simResult" class="result-box">Vaka bekleniyor.</div>
+        </article>
+
+        <section class="card action-panel">
+          <h2>Klinik Aksiyon Paneli</h2>
+          <p class="muted">Aksiyona dokunarak sec, sonra Uygula ile hastaya etki ettir.</p>
+          <div id="actionGrid" class="action-grid"></div>
+          <div class="inline-actions">
+            <span id="selectedActionTag" class="pill">Secilen aksiyon: -</span>
+            <button id="applyActionBtn" class="btn btn-primary">Aksiyonu Uygula</button>
+          </div>
+        </section>
+
+        <article class="card body-card">
+          <h2>Body Interaction</h2>
+          <p class="muted">Bolge secimi yap, gerekirse hedefli mudahale uygula.</p>
+          <div class="body-wrap">
+            <svg id="bodySvg" viewBox="0 0 320 520" aria-label="Hasta vucut modeli">
+              <defs>
+                <linearGradient id="humanFill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#f8fdfc" />
+                  <stop offset="100%" stop-color="#e2f2f0" />
+                </linearGradient>
+              </defs>
+              <circle cx="160" cy="56" r="34" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+              <rect x="116" y="92" width="88" height="170" rx="34" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+              <rect x="68" y="110" width="42" height="128" rx="16" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+              <rect x="210" y="110" width="42" height="128" rx="16" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+              <rect x="124" y="258" width="32" height="190" rx="14" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+              <rect x="164" y="258" width="32" height="190" rx="14" fill="url(#humanFill)" stroke="#8fbab7" stroke-width="2" />
+
+              <g class="body-zone" data-zone="chest" tabindex="0">
+                <circle cx="160" cy="152" r="24" />
+                <text x="160" y="156">Gogus</text>
+              </g>
+              <g class="body-zone" data-zone="right_arm" tabindex="0">
+                <circle cx="230" cy="152" r="22" />
+                <text x="230" y="156">Sag Kol</text>
+              </g>
+              <g class="body-zone" data-zone="left_thigh" tabindex="0">
+                <circle cx="140" cy="324" r="22" />
+                <text x="140" y="328">Sol Uyluk</text>
+              </g>
+              <g class="body-zone" data-zone="right_gluteal" tabindex="0">
+                <circle cx="186" cy="268" r="22" />
+                <text x="186" y="272">Sag Gluteal</text>
+              </g>
+            </svg>
+          </div>
+          <p id="selectedZoneLabel" class="pill">Secili bolge: Gogus</p>
+          <p id="bodyHint" class="feedback-line"></p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Nobet Logu</h2>
+        <div id="simLog" class="history-list"></div>
+      </section>
+    </main>
+
+    <footer class="shell-footer">
+      <p>Esila Nurse Studio | Simulasyon Merkezi</p>
+    </footer>
+
+    <script src="app-core.js" defer></script>
+    <script src="simulation.js" defer></script>
+  </body>
+</html>
